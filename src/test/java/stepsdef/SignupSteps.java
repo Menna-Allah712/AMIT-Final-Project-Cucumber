@@ -30,17 +30,15 @@ public class SignupSteps {
         signupPage.insertUsername("Menna14");
         signupPage.insertPassword("123!");
         signupAlert = signupPage.clickOnSignupButton();
-
-        
     }
 
     @Then("user is switched to signupAlert & success message appear")
-    public void userIsSwitchedToSignupAlertSuccessMessageAppear() {
+    public void userIsSwitchedToSignupAlertSuccessMessageAppear() throws InterruptedException {
         String expectedResult = "Sign up successful.";
         String actualResult = signupAlert.readMessage();
         Thread.sleep (2000);
         Assert.assertTrue(actualResult.contains(expectedResult));
-        SignupAlert.closeAlert();
+        signupAlert.closeAlert();
     }
 
     @When("user enters exist {string} & {string} & press on signup button")
@@ -52,7 +50,7 @@ public class SignupSteps {
     }
 
     @Then("user is switched to signupAlert & error message appear")
-    public void userIsSwitchedToSignupAlertErrorMessageAppear() {
+    public void userIsSwitchedToSignupAlertErrorMessageAppear() throws InterruptedException {
         String expectedResult = "This user already exist.";
         String actualResult = signupAlert.readMessage();
         Thread.sleep (2000);
